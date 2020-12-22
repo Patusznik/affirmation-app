@@ -1,5 +1,6 @@
 module.exports = {
   arrowParens: "always",
+  "editor.formatOnSave": true,
   bracketSpacing: true,
   jsxBracketSameLine: true,
   printWidth: 80,

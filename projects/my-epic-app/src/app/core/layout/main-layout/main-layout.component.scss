@@ -1,11 +1,29 @@
 .spacer {
   flex: 1 0 auto;
 }
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
-button {
+.side-nav-container {
+  flex: 1;
+}
+.nav-links button {
   margin: 0 10px;
+  background-color: #008891;
 
   &.active {
-    filter: brightness(120%)
+    filter: brightness(120%);
   }
+}
+
+.tb {
+  background-color: #0f3057;
+  color: #e7e7de;
 }
