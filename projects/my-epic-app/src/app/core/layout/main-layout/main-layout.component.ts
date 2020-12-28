@@ -6,13 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-  fillerContent = Array.from({length: 50}, () =>
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-   labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-   laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-   cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
+
+
+  toolkitItems = [
+    { linkTitle: 'Organize yourself', link: ['/organizer']},
+    { linkTitle: 'Relaxing space', link: ['/relaxing-space']},
+    { linkTitle: 'Motivation corner', link: ['/motivation-corner']},
+  ];
+
+  schoolItems = [
+    { linkTitle: 'Transerfing', link: ['/transerfing']},
+    { linkTitle: 'Law of attraction', link: ['/law-of-attraction']},
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
