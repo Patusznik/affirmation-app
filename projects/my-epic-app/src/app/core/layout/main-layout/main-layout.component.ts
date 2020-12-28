@@ -8,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class MainLayoutComponent implements OnInit {
 
 
-  listItems = [
+  toolkitItems = [
     { linkTitle: 'Organize yourself', link: ['/organizer']},
     { linkTitle: 'Relaxing space', link: ['/relaxing-space']},
     { linkTitle: 'Motivation corner', link: ['/motivation-corner']},
+  ];
+
+  schoolItems = [
+    { linkTitle: 'Transerfing', link: ['/transerfing']},
+    { linkTitle: 'Law of attraction', link: ['/law-of-attraction']},
   ];
 
   constructor() { }

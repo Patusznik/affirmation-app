@@ -10,7 +10,9 @@
         Home
       </button>
       <button mat-flat-button routerLink="admin" routerLinkActive="active">
-        Admin
+        Admin</button
+      ><button mat-flat-button routerLink="profile" routerLinkActive="active">
+        Profile
       </button>
     </div>
   </mat-toolbar>
@@ -21,7 +23,17 @@
           mat-list-item
           [routerLink]="item.link"
           routerLinkActive="active"
-          *ngFor="let item of listItems"
+          *ngFor="let item of toolkitItems"
+          >{{ item.linkTitle }}</a
+        >
+      </mat-nav-list>
+      <p>Choose your way</p>
+      <mat-nav-list>
+        <a
+          mat-list-item
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          *ngFor="let item of schoolItems"
           >{{ item.linkTitle }}</a
         >
       </mat-nav-list></mat-sidenav
