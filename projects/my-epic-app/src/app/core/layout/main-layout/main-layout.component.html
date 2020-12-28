@@ -16,10 +16,14 @@
   </mat-toolbar>
   <mat-sidenav-container class="side-nav-container">
     <mat-sidenav #snav
-      >Start<mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{
-          nav
-        }}</a>
+      >Toolkit<mat-nav-list>
+        <a
+          mat-list-item
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          *ngFor="let item of listItems"
+          >{{ item.linkTitle }}</a
+        >
       </mat-nav-list></mat-sidenav
     >
     <mat-sidenav-content
