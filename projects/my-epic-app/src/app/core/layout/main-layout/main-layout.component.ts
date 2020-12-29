@@ -9,9 +9,9 @@ export class MainLayoutComponent implements OnInit {
 
 
   toolkitItems = [
-    { linkTitle: 'Organize yourself', link: ['/organizer']},
-    { linkTitle: 'Relaxing space', link: ['/relaxing-space']},
-    { linkTitle: 'Motivation corner', link: ['/motivation-corner']},
+    { linkTitle: 'Organize yourself', link: ['/toolkit/organizer']},
+    { linkTitle: 'Relaxing space', link: ['/toolkit/relaxing-space']},
+    { linkTitle: 'Motivation corner', link: ['/toolkit/motivation-corner']},
   ];
 
   schoolItems = [

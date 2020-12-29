@@ -7,13 +7,21 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'home'
   },
-
   {
     path: 'home',
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule)
   },
-  { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule) },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.module').then((m) => m.AdminModule)
+  },
+  {
+    path: 'toolkit',
+    loadChildren: () =>
+      import('./features/toolkit/toolkit.module').then((m) => m.ToolkitModule)
+  },
   {
     path: '**',
     redirectTo: 'home'
