@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-org-root',
+  selector: 'ezo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

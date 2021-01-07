@@ -1,2 +1,25 @@
 <p>organizer works!</p>
-<my-org-affirmation-list></my-org-affirmation-list>
+<mat-tab-group>
+  <mat-tab>
+    <!-- #docregion label-directive -->
+    <ng-template mat-tab-label> Affirmations </ng-template>
+    <!-- #enddocregion label-directive -->
+    <ezo-affirmations></ezo-affirmations>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label> Goals </ng-template>
+    goals comp
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label> Statistics </ng-template>
+
+    stats comp
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> Calendar </ng-template>
+
+    calendar comp
+  </mat-tab>
+</mat-tab-group>

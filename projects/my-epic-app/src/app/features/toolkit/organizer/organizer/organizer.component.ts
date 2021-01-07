@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'my-org-organizer',
+  selector: 'ezo-organizer',
   templateUrl: './organizer.component.html',
   styleUrls: ['./organizer.component.scss']
 })
 export class OrganizerComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
