@@ -6,6 +6,8 @@ export class AppPage {
   }
 
   getTitleText(): Promise<string> {
-    return element(by.css('my-org-root .content span')).getText() as Promise<string>;
+    return element(
+      by.css('ezo-root .content span')
+    ).getText() as Promise<string>;
   }
 }

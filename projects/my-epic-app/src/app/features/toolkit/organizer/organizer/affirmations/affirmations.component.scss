@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+
+  ezo-affirmation-list {
+    flex: 1;
+  }
+
+  ezo-affirmation-detail {
+    flex: 1;
+  }
+}

@@ -12,7 +12,7 @@
       },
       "root": "projects/my-epic-app",
       "sourceRoot": "projects/my-epic-app/src",
-      "prefix": "my-org",
+      "prefix": "ezo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
