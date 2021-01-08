@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  justify-content: stretch;
+  justify-content: center;
+  padding: 15px;
 
   ezo-affirmation-list {
     flex: 1;
