@@ -1,19 +1,21 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Affirmation name</mat-card-title>
-    <mat-card-subtitle>Affirmation type</mat-card-subtitle>
+    <mat-card-title>{{ affirmation.name }}</mat-card-title>
+    <mat-card-subtitle>{{ affirmation.type }}</mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
-    src="https://images.unsplash.com/photo-1480719598364-fe3123242a9d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
-    alt="Photo of an affirmation"
+    [src]="affirmation.imagePath"
+    alt="{{ affirmation.name }}"
   />
   <mat-card-content>
-    <p>Afirmation description</p>
+    <p>{{ affirmation.description }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button type="button" class="btn btn-outline-info">Edit Affirmation</button>
+    <button type="button" class="btn btn-outline-warning">
+      Delete Affirmation
+    </button>
   </mat-card-actions>
 </mat-card>

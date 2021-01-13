@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 import { Affirmation } from '../../affirmation.model';
 
@@ -9,7 +9,14 @@ import { Affirmation } from '../../affirmation.model';
 })
 export class AffirmationItemComponent implements OnInit {
   @Input() affirmation: Affirmation;
+  @Output() affirmationSelected = new EventEmitter<void>();
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  @HostListener('click', ['$event'])
+  onSelected() {
+    this.affirmationSelected.emit();
+  }
 }
