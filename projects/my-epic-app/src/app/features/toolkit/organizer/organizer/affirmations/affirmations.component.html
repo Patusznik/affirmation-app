@@ -1,6 +1,10 @@
 <div class="container">
   <ezo-affirmation-list
-    (affirmationWasSelected)="selectedAffirmation = $event"
+    (affirmationWasSelected)="selectAffirmation($event)"
   ></ezo-affirmation-list>
-  <ezo-affirmation-detail></ezo-affirmation-detail>
+  <ezo-affirmation-detail
+    *ngIf="selectedAffirmation; else nothing"
+    [affirmation]="selectedAffirmation"
+  ></ezo-affirmation-detail>
+  <ng-template #nothing></ng-template>
 </div>

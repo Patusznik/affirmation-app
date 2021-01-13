@@ -25,6 +25,12 @@ export class AffirmationListComponent implements OnInit {
       'This is simply a test',
       'loremmmmm ipsummmm memememe ',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'
+    ),
+    new Affirmation(
+      'third',
+      'This is weird',
+      'wtf',
+      'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'
     )
   ];
   constructor() {}

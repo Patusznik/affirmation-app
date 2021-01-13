@@ -12,4 +12,8 @@ export class AffirmationsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  selectAffirmation(event: Affirmation) {
+    this.selectedAffirmation = event;
+  }
 }

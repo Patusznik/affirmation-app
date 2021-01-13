@@ -1,13 +1,14 @@
-<a href="#" class="list-container">
-  <div class="to-left">
-    <h4 class="item-name">{{ affirmation.name }}</h4>
-    <p class="item-desc">{{ affirmation.description }}</p>
-  </div>
-  <span class="to-right">
-    <img
-      [src]="affirmation.imagePath"
-      alt="{{ affirmation.name }}"
-      style="max-height: 50px"
-    />
-  </span>
-</a>
+<!-- <a class="list-container"> -->
+<div class="to-left">
+  <h4 class="item-name">{{ affirmation.name }}</h4>
+  <p class="item-desc">{{ affirmation.description }}</p>
+</div>
+<span class="to-right">
+  <img
+    style="cursor: pointer"
+    [src]="affirmation.imagePath"
+    alt="{{ affirmation.name }}"
+    style="max-height: 50px"
+  />
+</span>
+<!-- </a> -->
