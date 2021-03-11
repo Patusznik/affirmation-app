@@ -8,22 +8,28 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { CoreModule } from './core/core.module';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyB6eXelxmw8qoMdakyEVOaDASzJ1WNdOOc',
-  authDomain: 'affirmation-app-aa954.firebaseapp.com',
-  projectId: 'affirmation-app-aa954',
-  storageBucket: 'affirmation-app-aa954.appspot.com',
-  messagingSenderId: '364458238232',
-  appId: '1:364458238232:web:40af6b826b855ab5813e6d',
-  measurementId: 'G-FW9NVXX1C3'
-};
+import { AuthService } from './shared/services/auth.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    ProfileComponent
+  ],
   imports: [
     CoreModule,
     AppRoutingModule,
@@ -31,12 +37,13 @@ const firebaseConfig = {
     FormsModule,
     MatPaginatorModule,
     MatChipsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
+    AngularFireAuthModule,
+    // auth
     AngularFireStorageModule // storage
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -4,7 +4,7 @@
       <button mat-icon-button (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <h1>Affirmation App</h1>
+      <h1>AffirMe</h1>
       <span class="spacer"></span>
       <div class="nav-links">
         <button mat-flat-button routerLink="home" routerLinkActive="active">
@@ -15,6 +15,8 @@
         ><button mat-flat-button routerLink="profile" routerLinkActive="active">
           Profile
         </button>
+
+        <button mat-flat-button (click)="auth.SignOut()">Log Out</button>
       </div>
     </mat-toolbar>
     <mat-sidenav-container class="side-nav-container">

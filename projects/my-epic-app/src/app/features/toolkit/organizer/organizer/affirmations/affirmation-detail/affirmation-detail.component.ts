@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Affirmation } from '../affirmation.model';
+import { AffirmationService } from '../affirmation.service';
 
 @Component({
   selector: 'ezo-affirmation-detail',
@@ -10,7 +11,8 @@ import { Affirmation } from '../affirmation.model';
 })
 export class AffirmationDetailComponent implements OnInit {
   @Input() affirmation: Affirmation;
-  constructor() {}
+
+  constructor(private affService: AffirmationService) {}
 
   ngOnInit(): void {}
 }
