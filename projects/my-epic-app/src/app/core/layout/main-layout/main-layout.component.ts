@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../../shared/services/auth.service';
+
 @Component({
   selector: 'ezo-main-layout',
   templateUrl: './main-layout.component.html',
@@ -17,7 +19,7 @@ export class MainLayoutComponent implements OnInit {
     { linkTitle: 'Law of attraction', link: ['/law-of-attraction'] }
   ];
 
-  constructor() {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {}
 }
