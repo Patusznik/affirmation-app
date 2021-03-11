@@ -5,8 +5,11 @@
     Delete Affirmation
   </button>
 </div>
+<!-- <div *ngFor="let aff of affirmations$ | async">
+  <p>{{ aff.type }}</p>
+</div> -->
 <ezo-affirmation-item
-  *ngFor="let affirmationEl of affirmations"
+  *ngFor="let affirmationEl of affirmations$ | async"
   [affirmation]="affirmationEl"
   (affirmationSelected)="onAffirmationSelected(affirmationEl)"
 ></ezo-affirmation-item>
