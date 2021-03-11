@@ -9,9 +9,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
-
 // import { AuthComponent } from './auth/auth.component';
-
 // const routes: Routes = [
 //   {
 //     path: '',
@@ -55,9 +53,15 @@ const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard',
+    // component: MainLayoutComponent
+    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule)
+  },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent }
+  { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'error', component: DashboardComponent },
+  { path: '**', redirectTo: 'error' }
 ];
 
 @NgModule({

@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { User } from '../services/user';
 
@@ -13,7 +15,22 @@ import { User } from '../services/user';
 export class AuthService {
   // tslint:disable-next-line:no-any
   userData: any; // Save logged in user data
+  user$: Observable<any[]>;
 
+  //   import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+  // import firebase from "firebase/app";
+  // import * as ɵngcc0 from '@angular/core';
+  // export declare const collections: {
+  //     users: string;
+  // };
+  // export declare class FirestoreSyncService {
+  //     afs: AngularFirestore;
+  //     constructor(afs: AngularFirestore);
+  //     getUserDocRefByUID(uid: string): AngularFirestoreDocument<firebase.UserInfo>;
+  //     deleteUserData(uid: string): Promise<any>;
+  //     updateUserData(user: firebase.UserInfo): Promise<any>;
+  //     static ɵfac: ɵngcc0.ɵɵFactoryDef<FirestoreSyncService, never>;
+  // }
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -32,6 +49,21 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
+
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        // Logged in
+        if (user) {
+          return this.afs
+            .doc<User>(`users/${user.uid}`)
+            .collection<any>('affirmations')
+            .valueChanges();
+        } else {
+          // Logged out
+          return of(null);
+        }
+      })
+    );
   }
 
   // // Returns true when user is looged in and email is verified
@@ -135,6 +167,7 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -155,4 +188,9 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     });
   }
+
+  // constructor(
+  //   private authProcess: AuthProcessService,
+  //   private firestoreSync: FirestoreSyncService,
+  // ) {}
 }

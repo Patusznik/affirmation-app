@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AppComponent {
   title = 'my-epic-app';
   constructor(private db: AngularFirestore) {
-    const things = db.collection('affirmations').valueChanges();
-    things.subscribe(console.log);
+    // const things = db.collection('affirmations').valueChanges();
+    // things.subscribe(console.log);
   }
 }
