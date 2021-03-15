@@ -4,5 +4,5 @@ export interface User {
   photoURL?: string;
   displayName?: string;
   myCustomData?: string;
-  createdAt?: firebase.firestore.Timestamp;
+  createdAt?: firebase.default.firestore.Timestamp;
 }
