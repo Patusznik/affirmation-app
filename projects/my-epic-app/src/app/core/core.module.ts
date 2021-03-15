@@ -5,12 +5,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { ProfileComponent } from '../components/profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
+import { FooterComponent } from './layout/footer/footer.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,10 @@ const routes: Routes = [
           import('../features/toolkit/toolkit.module').then(
             (m) => m.ToolkitModule
           )
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   }
@@ -44,11 +51,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MainLayoutComponent],
+  declarations: [
+    MainLayoutComponent,
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent
+  ],
   imports: [
     //vendor
-    BrowserModule,
-    BrowserAnimationsModule,
+    // BrowserModule,
+    // BrowserAnimationsModule,
     RouterModule.forChild(routes),
     CommonModule,
     SharedModule,
@@ -58,8 +70,15 @@ const routes: Routes = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    NgbModule
   ],
-  exports: [MainLayoutComponent]
+  exports: [
+    MainLayoutComponent,
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent,
+    NgbModule
+  ]
 })
 export class CoreModule {}
