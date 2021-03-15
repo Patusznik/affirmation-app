@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ProfileComponent } from '../components/profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
@@ -33,6 +31,10 @@ const routes: Routes = [
           import('../features/toolkit/toolkit.module').then(
             (m) => m.ToolkitModule
           )
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   }
@@ -47,10 +49,10 @@ const routes: Routes = [
   declarations: [MainLayoutComponent],
   imports: [
     //vendor
-    BrowserModule,
-    BrowserAnimationsModule,
+    // BrowserModule,
+    // BrowserAnimationsModule,
     RouterModule.forChild(routes),
-    CommonModule,
+    // CommonModule,
     SharedModule,
 
     //material
