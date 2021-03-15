@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { AffirmationDetailComponent } from './organizer/affirmations/affirmation-detail/affirmation-detail.component';
@@ -26,6 +27,11 @@ const routes: Routes = [
     AffirmationListComponent,
     AffirmationDetailComponent
   ],
-  imports: [RouterModule.forChild(routes), CommonModule, SharedModule]
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule,
+    SharedModule,
+    NgbModule
+  ]
 })
 export class OrganizerModule {}

@@ -4,6 +4,7 @@
 .sidebar {
   min-height: calc(100vh - #{$navbar-height});
   background: $sidebar-bg;
+  background-color: #d0e8f2;
   font-family: $type1-regular;
   padding: 0;
   width: $sidebar-width-lg;
@@ -44,24 +45,25 @@
         @include align-items(center);
         white-space: nowrap;
         padding: $sidebar-menu-padding-y 0 $sidebar-menu-padding-y 0;
-        color: $sidebar-menu-color;
+        color: #79a3b1;
         @include transition-duration(0.45s);
         transition-property: color;
         -webkit-transition-property: color;
         cursor: pointer;
 
         i {
-          color: inherit;
+          color: #456268;
 
           &.menu-icon {
             font-size: $sidebar-icon-font-size;
             line-height: 1;
+            color: #456268;
             margin-left: auto;
             .rtl & {
               margin-left: 0;
               margin-right: auto;
             }
-            color: $sidebar-menu-icon-color;
+            color: #79a3b1;
             &:before {
               vertical-align: middle;
             }
@@ -76,15 +78,16 @@
               margin-left: 0;
               margin-right: auto;
             }
-            color: $sidebar-menu-arrow-color;
+            color: #79a3b1;
             &:before {
               content: '\f0141';
               font-size: inherit;
-              color: inherit;
+              color: #79a3b1;
             }
             + .menu-icon {
               margin-left: 0.25rem;
               margin-bottom: 0.25rem;
+              color: #79a3b1;
               .rtl & {
                 margin-left: 0;
                 margin-right: 0.25rem;
@@ -118,17 +121,17 @@
       &.active {
         .nav-link {
           .menu-title {
-            color: $sidebar-menu-active-color;
+            color: #456268;
             font-family: $type1-medium;
           }
           i {
-            color: theme-color(primary);
+            color: #456268;
           }
         }
       }
 
       &:hover {
-        background: $sidebar-menu-hover-bg;
+        background: #fcf8ec;
       }
       &.nav-profile {
         .nav-link {

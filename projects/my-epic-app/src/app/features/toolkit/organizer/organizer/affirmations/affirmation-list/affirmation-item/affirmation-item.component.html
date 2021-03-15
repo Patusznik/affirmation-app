@@ -1,5 +1,5 @@
 <!-- <a class="list-container"> -->
-<div class="to-left">
+<!-- <div class="to-left">
   <h4 class="item-name">{{ affirmation.name }}</h4>
   <p class="item-desc">{{ affirmation.description }}</p>
 </div>
@@ -10,5 +10,23 @@
     alt="{{ affirmation.name }}"
     style="max-height: 50px"
   />
-</span>
+</span> -->
 <!-- </a> -->
+<ngb-tabset type="pills" class="pills-success">
+  <ngb-tab title="{{ affirmation.name }}">
+    <ng-template ngbTabContent>
+      <div class="media">
+        <img
+          class="mr-3 w-25 rounded"
+          src="assets/images/samples/300x300/12.jpg"
+          alt="sample image"
+        />
+        <div class="media-body">
+          <p>
+            {{ affirmation.description }}
+          </p>
+        </div>
+      </div>
+    </ng-template></ngb-tab
+  ></ngb-tabset
+>
