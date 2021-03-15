@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div class="nav-container">
     <mat-toolbar class="tb example-toolbar">
       <button mat-icon-button (click)="snav.toggle()">
@@ -22,7 +22,7 @@
     <mat-sidenav-container class="side-nav-container">
       <mat-sidenav #snav
         >Toolkit<mat-nav-list>
-          <!-- <a
+          <a
             mat-list-item
             [routerLink]="item.link"
             routerLinkActive="active"
@@ -38,7 +38,7 @@
             routerLinkActive="active"
             *ngFor="let item of schoolItems"
             >{{ item.linkTitle }}</a
-          > -->
+          >
         </mat-nav-list></mat-sidenav
       >
       <mat-sidenav-content
@@ -46,4 +46,22 @@
       ></mat-sidenav-content>
     </mat-sidenav-container>
   </div>
+</div> -->
+<div class="container-scroller">
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div class="main-panel" [ngClass]="{ 'main-panel-only': !showSidebar }">
+      <div class="content-wrapper">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div contentAnimate *ngIf="!isLoading" class="h-100">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <app-footer *ngIf="showFooter"></app-footer>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
 </div>

@@ -3,7 +3,7 @@
     <div class="authBlock">
       <h3>Thank You for Registering</h3>
 
-      <div class="formGroup" *ngIf="authService.userData as user">
+      <!-- <div class="formGroup" *ngIf="authService.userData as user">
         <p class="text-center">
           We have sent a confirmation email to <strong>{{ user.email }}</strong
           >.
@@ -12,18 +12,18 @@
           Please check your email and click on the link to verfiy your email
           address.
         </p>
-      </div>
+      </div> -->
 
       <!-- Calling SendVerificationMail() method using authService Api -->
       <div class="formGroup">
-        <button
+        <!-- <button
           type="button"
           class="btn btnPrimary"
           (click)="authService.SendVerificationMail()"
-        >
-          <i class="fas fa-redo-alt"></i>
+        > -->
+        <!-- <i class="fas fa-redo-alt"></i>
           Resend Verification Email
-        </button>
+        </button> -->
       </div>
     </div>
 
