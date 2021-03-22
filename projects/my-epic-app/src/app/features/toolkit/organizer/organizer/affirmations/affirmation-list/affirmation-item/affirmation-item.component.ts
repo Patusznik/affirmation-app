@@ -10,6 +10,8 @@ import { Affirmation } from '../../affirmation.model';
 export class AffirmationItemComponent implements OnInit {
   @Input() affirmation: Affirmation;
   @Output() affirmationSelected = new EventEmitter<void>();
+  // @Input() areAffirmationsLighted: boolean = false;
+  @Input() isChecked: boolean = false;
 
   constructor() {}
 
@@ -18,5 +20,11 @@ export class AffirmationItemComponent implements OnInit {
   @HostListener('click', ['$event'])
   onSelected() {
     this.affirmationSelected.emit();
+  }
+
+  checkUncheck() {
+    this.affirmation.checked = !this.affirmation.checked;
+    console.log(this.affirmation.checked);
+    console.log(this.isChecked);
   }
 }

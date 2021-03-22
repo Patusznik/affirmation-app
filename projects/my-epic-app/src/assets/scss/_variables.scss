@@ -105,17 +105,17 @@ $sidebar-width-lg: 260px;
 $sidebar-width-mini: 185px;
 $sidebar-width-icon: 70px;
 
-$sidebar-bg: $white;
+$sidebar-bg: #fcf8ec;
 $sidebar-menu-color: #3e4b5b;
-$sidebar-submenu-color: #888;
-$sidebar-menu-active-bg: $white;
+$sidebar-submenu-color: #79a3b1;
+$sidebar-menu-active-bg: #fcf8ec;
 $sidebar-menu-active-color: #456268;
 $sidebar-menu-hover-bg: darken($sidebar-bg, 1%);
 $sidebar-menu-hover-color: darken($sidebar-menu-color, 10%);
 $sidebar-submenu-hover-color: darken($sidebar-submenu-color, 20%);
 $sidebar-menu-icon-color: #bba8bff5;
 $sidebar-menu-arrow-color: #9e9da0;
-$sidebar-menu-border-color: #f2edf3;
+$sidebar-menu-border-color: #fcf8ec;
 
 $sidebar-menu-font-size: $default-font-size;
 $sidebar-menu-padding-y: 1.125rem;

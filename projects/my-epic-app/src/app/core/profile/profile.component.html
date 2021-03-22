@@ -1,0 +1,40 @@
+<div class="container" *ngIf="auth.user$ | async as user">
+  <div class="photo-container">
+    <img [src]="user.photoURL" />
+    <p class="with-padding" (click)="onProfilePicChange($event)">
+      Change your profile picture
+    </p>
+    <input *ngIf="allowPicToChange === true" [(ngModel)]="user.photoURL" />
+  </div>
+
+  <div class="form-container">
+    <h2>Account Settings</h2>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        required
+        [(ngModel)]="user.displayName"
+        name="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        required
+        [(ngModel)]="user.email"
+        name="email"
+      />
+    </div>
+    <p>
+      Last login: {{ user.createdAt.toDate() | date: 'dd LLLL yyyy hh:mm a' }}
+    </p>
+    <button (click)="auth.SetUserData(user)">Save Changes</button>
+  </div>
+</div>

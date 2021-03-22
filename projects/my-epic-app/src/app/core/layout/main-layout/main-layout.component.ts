@@ -29,30 +29,30 @@ export class MainLayoutComponent implements OnInit {
           document
             .querySelector('.page-body-wrapper')
             .classList.add('full-page-wrapper');
-          document
-            .querySelector('.content-wrapper')
-            .classList.remove('auth', 'auth-img-bg');
+          // document
+          //   .querySelector('.content-wrapper')
+          //   .classList.remove('auth', 'auth-img-bg');
           document
             .querySelector('.content-wrapper')
             .classList.remove('auth', 'lock-full-bg');
-          if (
-            event['url'] == '/error-pages/404' ||
-            event['url'] == '/error-pages/500'
-          ) {
-            document.querySelector('.content-wrapper').classList.add('p-0');
-          }
-        } else {
-          this.showSidebar = true;
-          this.showNavbar = true;
-          this.showFooter = true;
-          document.querySelector('.main-panel').classList.remove('w-100');
-          document
-            .querySelector('.page-body-wrapper')
-            .classList.remove('full-page-wrapper');
-          document
-            .querySelector('.content-wrapper')
-            .classList.remove('auth', 'auth-img-bg');
-          document.querySelector('.content-wrapper').classList.remove('p-0');
+          //   if (
+          //     event['url'] == '/error-pages/404' ||
+          //     event['url'] == '/error-pages/500'
+          //   ) {
+          //     document.querySelector('.content-wrapper').classList.add('p-0');
+          //   }
+          // } else {
+          //   this.showSidebar = true;
+          //   this.showNavbar = true;
+          //   this.showFooter = true;
+          //   document.querySelector('.main-panel').classList.remove('w-100');
+          //   document
+          //     .querySelector('.page-body-wrapper')
+          //     .classList.remove('full-page-wrapper');
+          //   document
+          //     .querySelector('.content-wrapper')
+          //     .classList.remove('auth', 'auth-img-bg');
+          //   document.querySelector('.content-wrapper').classList.remove('p-0');
         }
       }
     });

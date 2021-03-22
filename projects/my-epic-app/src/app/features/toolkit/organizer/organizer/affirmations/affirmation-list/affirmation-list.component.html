@@ -1,22 +1,28 @@
-<!-- <div class="buttons">
-  <button type="button" class="btn btn-outline-success">New Affirmation</button>
-  <button type="button" class="btn btn-outline-info">Edit Affirmation</button>
-  <button type="button" class="btn btn-outline-warning">
-    Delete Affirmation
-  </button>
-</div> -->
-<!-- <div *ngFor="let aff of affirmations$ | async">
-  <p>{{ aff.type }}</p>
-</div> -->
-
-<div class="col-md-6 grid-margin stretch-card">
+<div class="grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Pills</h4>
-      <p class="card-description">Basic nav pills</p>
+      <h4 class="card-title">Your Affirmations</h4>
+      <p class="card-description">Play with them!</p>
+      <button type="button" class="btn btn-inverse-success btn-fw">
+        New Affirmation
+      </button>
+      <br />
+      <div class="delete-section">
+        <button type="button" class="btn btn-inverse-danger btn-fw" ś>
+          Delete Affirmation
+        </button>
+        <button
+          type="button"
+          class="btn btn-inverse-info btn-icon"
+          (click)="checkUncheckAll()"
+        >
+          <i class="mdi mdi-checkbox-blank-circle-outline"></i>
+        </button>
+      </div>
       <ezo-affirmation-item
         *ngFor="let affirmationEl of affirmations$ | async"
         [affirmation]="affirmationEl"
+        [isChecked]="isChecked"
         (affirmationSelected)="onAffirmationSelected(affirmationEl)"
       ></ezo-affirmation-item>
     </div>

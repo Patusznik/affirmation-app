@@ -1,16 +1,18 @@
 .container {
   display: flex;
-  justify-content: center;
   padding: 15px;
 
   ezo-affirmation-list {
     flex: 1;
     padding-right: 5px;
-    justify-content: center;
   }
 
   ezo-affirmation-detail {
     flex: 1;
     padding-left: 5px;
+  }
+
+  ng-template {
+    flex: 1;
   }
 }

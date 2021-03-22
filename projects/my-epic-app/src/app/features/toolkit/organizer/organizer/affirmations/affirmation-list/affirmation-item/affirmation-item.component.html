@@ -16,15 +16,31 @@
   <ngb-tab title="{{ affirmation.name }}">
     <ng-template ngbTabContent>
       <div class="media">
+        <button
+          type="button"
+          class="btn btn-inverse-info btn-icon"
+          (click)="isChecked = !isChecked"
+          (click)="checkUncheck()"
+        >
+          <i
+            class="mdi"
+            [ngClass]="[
+              isChecked
+                ? 'mdi-check-circle'
+                : 'mdi-checkbox-blank-circle-outline'
+            ]"
+          ></i>
+        </button>
         <img
           class="mr-3 w-25 rounded"
-          src="assets/images/samples/300x300/12.jpg"
+          [src]="affirmation.imagePath"
           alt="sample image"
         />
         <div class="media-body">
-          <p>
+          <p [ngClass]="{ lighted: isChecked }">
             {{ affirmation.description }}
           </p>
+          <p>{{ affirmation.checked }}</p>
         </div>
       </div>
     </ng-template></ngb-tab

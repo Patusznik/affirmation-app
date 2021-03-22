@@ -17,13 +17,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { CoreModule } from './core/core.module';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { AuthService } from './shared/services/auth.service';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +33,8 @@ import { AuthService } from './shared/services/auth.service';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    ProfileComponent,
-    // SpinnerComponent,
-    ContentAnimateDirective
+    ContentAnimateDirective,
+    LandingPageComponent
   ],
   imports: [
     CoreModule,

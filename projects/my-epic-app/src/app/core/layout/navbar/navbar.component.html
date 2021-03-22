@@ -38,13 +38,14 @@
           class="nav-link dropdown-toggle"
           id="profileDropdown"
           ngbDropdownToggle
+          *ngIf="auth.user$ | async as user"
         >
           <div class="nav-profile-img">
-            <img src="assets/images/faces/face1.jpg" alt="image" />
+            <img [src]="user.photoURL" alt="image" />
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">
-            <p class="mb-1 text-black">David Greymaax</p>
+            <p class="mb-1 text-black">{{ user.displayName }}</p>
           </div>
         </a>
         <div
@@ -204,7 +205,7 @@
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="javascript:;">
+        <a class="nav-link" (click)="auth.signOut()" routerLink="sign-in">
           <i class="mdi mdi-power"></i>
         </a>
       </li>

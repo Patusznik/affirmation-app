@@ -15,33 +15,20 @@ import { AffirmationService } from '../affirmation.service';
 export class AffirmationListComponent implements OnInit {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
 
-  affirmations$: Observable<any[]> = this.affService.kotek;
-  // affirmations: Affirmation[] = [
-  //   new Affirmation(
-  //     'A Test affirmation',
-  //     'This is simply a test',
-  //     'lorem ipsum dolor',
-  //     'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'
-  //   ),
-  //   new Affirmation(
-  //     'Another Test affirmation',
-  //     'This is simply a test',
-  //     'loremmmmm ipsummmm memememe ',
-  //     'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'
-  //   ),
-  //   new Affirmation(
-  //     'third',
-  //     'This is weird',
-  //     'wtf',
-  //     'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'
-  //   )
-  // ];
-  constructor(private affService: AffirmationService) {
-    // this.affirmations$.subscribe(console.log);
-  }
+  affirmations$: Observable<Affirmation[]> = this.affService.kotek;
+  // affirmation$: Observable<any> = this.affirmations$.pipe(map(affirmation: Affirmation))
+  isChecked: boolean = false;
+
+  constructor(private affService: AffirmationService) {}
 
   ngOnInit(): void {}
   onAffirmationSelected(affirmation: Affirmation) {
     this.affirmationWasSelected.emit(affirmation);
   }
+
+  checkUncheckAll() {}
 }
+// onAffirmationSelectedToDelete() {
+//   this.isaffirmationLighted = !this.isaffirmationLighted;
+//   console.log(this.isaffirmationLighted);
+// }

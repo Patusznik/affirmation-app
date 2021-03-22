@@ -1,64 +1,15 @@
-<!-- <div>
-  <div class="nav-container">
-    <mat-toolbar class="tb example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h1>AffirMe</h1>
-      <span class="spacer"></span>
-      <div class="nav-links">
-        <button mat-flat-button routerLink="home" routerLinkActive="active">
-          Home
-        </button>
-        <button mat-flat-button routerLink="admin" routerLinkActive="active">
-          Admin</button
-        ><button mat-flat-button routerLink="profile" routerLinkActive="active">
-          Profile
-        </button>
-
-        <button mat-flat-button (click)="auth.SignOut()">Log Out</button>
-      </div>
-    </mat-toolbar>
-    <mat-sidenav-container class="side-nav-container">
-      <mat-sidenav #snav
-        >Toolkit<mat-nav-list>
-          <a
-            mat-list-item
-            [routerLink]="item.link"
-            routerLinkActive="active"
-            *ngFor="let item of toolkitItems"
-            >{{ item.linkTitle }}</a
-          >
-        </mat-nav-list>
-        <p>Choose your way</p>
-        <mat-nav-list>
-          <a
-            mat-list-item
-            [routerLink]="item.link"
-            routerLinkActive="active"
-            *ngFor="let item of schoolItems"
-            >{{ item.linkTitle }}</a
-          >
-        </mat-nav-list></mat-sidenav
-      >
-      <mat-sidenav-content
-        ><main><router-outlet></router-outlet></main
-      ></mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
-</div> -->
 <div class="container-scroller">
-  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <ezo-navbar *ngIf="showNavbar"></ezo-navbar>
   <div class="container-fluid page-body-wrapper">
-    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <ezo-sidebar *ngIf="showSidebar"></ezo-sidebar>
     <div class="main-panel" [ngClass]="{ 'main-panel-only': !showSidebar }">
       <div class="content-wrapper coloring">
-        <app-spinner *ngIf="isLoading"></app-spinner>
+        <ezo-spinner *ngIf="isLoading"></ezo-spinner>
         <div class="background" contentAnimate *ngIf="!isLoading" class="h-100">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <app-footer *ngIf="showFooter"></app-footer>
+      <ezo-footer *ngIf="showFooter"></ezo-footer>
       <!-- partial -->
     </div>
     <!-- main-panel ends -->

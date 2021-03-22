@@ -1,0 +1,29 @@
+.image {
+  padding: 15em;
+
+  background-size: cover;
+  background-image: url('../../../assets/images/lost.jpeg');
+  display: flex;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    .error {
+      font-size: 15rem;
+      padding-right: 1rem;
+      margin: 10rem 0rem;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      font-size: 3rem;
+      justify-content: center;
+    }
+  }
+  a.text-white {
+    padding-top: 2rem;
+    align-self: center;
+  }
+}

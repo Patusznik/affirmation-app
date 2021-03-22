@@ -4,7 +4,7 @@
 .sidebar {
   min-height: calc(100vh - #{$navbar-height});
   background: $sidebar-bg;
-  background-color: #d0e8f2;
+  // background-color: #d0e8f2;
   font-family: $type1-regular;
   padding: 0;
   width: $sidebar-width-lg;
@@ -131,7 +131,7 @@
       }
 
       &:hover {
-        background: #fcf8ec;
+        background: $sidebar-menu-hover-bg;
       }
       &.nav-profile {
         .nav-link {
@@ -146,6 +146,7 @@
               width: 44px;
               height: 44px;
               border-radius: 100%;
+              object-fit: cover;
             }
           }
           .nav-profile-text {
