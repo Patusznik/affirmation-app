@@ -8,13 +8,13 @@
       </button>
       <br />
       <div class="delete-section">
-        <button type="button" class="btn btn-inverse-danger btn-fw" ś>
+        <button type="button" class="btn btn-inverse-danger btn-fw">
           Delete Affirmation
         </button>
         <button
           type="button"
           class="btn btn-inverse-info btn-icon"
-          (click)="checkUncheckAll()"
+          (click)="checkUncheckAll(!isAllChecked)"
         >
           <i class="mdi mdi-checkbox-blank-circle-outline"></i>
         </button>
@@ -22,8 +22,9 @@
       <ezo-affirmation-item
         *ngFor="let affirmationEl of affirmations$ | async"
         [affirmation]="affirmationEl"
-        [isChecked]="isChecked"
+        [checked]="isChecked(affirmationEl.id)"
         (affirmationSelected)="onAffirmationSelected(affirmationEl)"
+        (affirmationChecked)="onAffirmationChecked(affirmationEl.id, $event)"
       ></ezo-affirmation-item>
     </div>
   </div>

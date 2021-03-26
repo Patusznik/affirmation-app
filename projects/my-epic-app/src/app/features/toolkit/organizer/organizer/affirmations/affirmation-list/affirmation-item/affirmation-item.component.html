@@ -12,6 +12,7 @@
   />
 </span> -->
 <!-- </a> -->
+<!-- <div *ngFor="let user of user$ | async">{{ user }}</div> -->
 <ngb-tabset type="pills" class="pills-success">
   <ngb-tab title="{{ affirmation.name }}">
     <ng-template ngbTabContent>
@@ -19,15 +20,12 @@
         <button
           type="button"
           class="btn btn-inverse-info btn-icon"
-          (click)="isChecked = !isChecked"
           (click)="checkUncheck()"
         >
           <i
             class="mdi"
             [ngClass]="[
-              isChecked
-                ? 'mdi-check-circle'
-                : 'mdi-checkbox-blank-circle-outline'
+              checked ? 'mdi-check-circle' : 'mdi-checkbox-blank-circle-outline'
             ]"
           ></i>
         </button>
@@ -37,10 +35,11 @@
           alt="sample image"
         />
         <div class="media-body">
-          <p [ngClass]="{ lighted: isChecked }">
+          <p [ngClass]="{ lighted: checked }">
             {{ affirmation.description }}
           </p>
           <p>{{ affirmation.checked }}</p>
+          <p>{{ affirmation.id }}</p>
         </div>
       </div>
     </ng-template></ngb-tab
