@@ -8,15 +8,66 @@
       </button>
       <br />
       <div class="delete-section">
-        <button type="button" class="btn btn-inverse-danger btn-fw">
+        <button
+          type="button"
+          class="btn btn-inverse-danger btn-fw"
+          (click)="openSmallModal(smallModalContent)"
+          [disabled]="!isButtonEnabled"
+        >
           Delete Affirmation
         </button>
+        <ng-template
+          #smallModalContent
+          let-modal
+          class="modal fade"
+          aria-labelledby="exampleModalLabel-3"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel-3">Warning!</h5>
+              <button
+                type="button"
+                class="close"
+                (click)="modal.dismiss()"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete affirmation(s)?</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="modal.close()"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                class="btn btn-light"
+                (click)="modal.close()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </ng-template>
         <button
           type="button"
           class="btn btn-inverse-info btn-icon"
           (click)="checkUncheckAll(!isAllChecked)"
         >
-          <i class="mdi mdi-checkbox-blank-circle-outline"></i>
+          <i
+            class="mdi"
+            [ngClass]="[
+              isAllChecked && isButtonEnabled
+                ? 'mdi-check-circle'
+                : 'mdi-checkbox-blank-circle-outline'
+            ]"
+          ></i>
         </button>
       </div>
       <ezo-affirmation-item

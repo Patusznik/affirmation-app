@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
 import { Affirmation } from '../affirmation.model';
@@ -9,15 +10,18 @@ import { AffirmationService } from '../affirmation.service';
   templateUrl: './affirmation-list.component.html',
   styleUrls: ['./affirmation-list.component.scss']
 })
-export class AffirmationListComponent implements OnInit {
+export class AffirmationListComponent {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
 
   affirmations$: Observable<Affirmation[]> = this.affService.kotek;
 
   affirmations: any;
   isAllChecked: boolean = false;
-  affId: string;
-  constructor(private affService: AffirmationService) {
+  isButtonEnabled: boolean = false;
+  constructor(
+    private affService: AffirmationService,
+    private modalService: NgbModal
+  ) {
     this.affirmations$.subscribe((affirmations: Affirmation[]) => {
       this.affirmations = affirmations.reduce(
         (ac, { id }) => ((ac[id] = { checked: false }), ac),
@@ -28,13 +32,18 @@ export class AffirmationListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  onButtonEnable() {
+    this.isButtonEnabled = Object.keys(this.affirmations)?.some((id) => {
+      return this.affirmations[id]?.checked === true;
+    });
+  }
   onAffirmationSelected(affirmation: Affirmation) {
     this.affirmationWasSelected.emit(affirmation);
   }
   onAffirmationChecked(foundId: string, value: boolean) {
     this.affirmations[foundId].checked = value;
-    this.affId = foundId;
+
+    this.onButtonEnable();
   }
 
   isChecked(foundId: string): boolean {
@@ -45,6 +54,14 @@ export class AffirmationListComponent implements OnInit {
     this.isAllChecked = value;
     Object.keys(this.affirmations).forEach((id) => {
       this.affirmations[id].checked = value;
+      this.onButtonEnable();
     });
+  }
+  deleteDocByID() {
+    return this.affService.deleteDocByID(this.affirmations);
+  }
+
+  openSmallModal(smallModalContent) {
+    this.modalService.open(smallModalContent, { size: 'sm' });
   }
 }

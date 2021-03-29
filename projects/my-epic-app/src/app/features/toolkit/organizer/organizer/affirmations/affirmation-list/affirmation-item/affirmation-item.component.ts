@@ -17,7 +17,6 @@ export class AffirmationItemComponent implements OnInit {
   @Output() affirmationSelected = new EventEmitter<void>();
   @Output() affirmationChecked = new EventEmitter<boolean>();
 
-  // @Input() areAffirmationsLighted: boolean = false;
   user$: Observable<User> = this.auth.user$;
 
   constructor(
@@ -28,32 +27,9 @@ export class AffirmationItemComponent implements OnInit {
   ngOnInit(): void {}
 
   @HostListener('click', ['$event'])
-  onSelected(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    // this.affirmationSelected.emit();
-  }
+  onSelected(event: Event) {}
 
   checkUncheck() {
-    console.log('check');
     this.affirmationChecked.emit(!this.checked);
-    // this.affirmation.checked = !this.affirmation.checked;
-    // console.log(this.affirmation.checked);
-    // console.log(this.isChecked);
-    console.log(this.checked);
-    // this.affService.updateDocByID(id, this.affirmation.checked);
   }
-  //   this.auth.usersAffirmations$.pipe(map(actions => actions.map(a => {
-  //     const data = a.payload.doc.id.data()
-  //     const id = a.payload.doc.id;
-  //     return {id, ...data}
-  //   }))).subscribe((_doc: any)=>{
-  //     let id = _doc[0].payload.doc.id;
-  //     this.
-  //   })
-  // }
-
-  // checkAll(arr){
-  //    arr.every(v => v === true)
-  // }
 }
