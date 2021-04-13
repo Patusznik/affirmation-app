@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
@@ -8,7 +9,8 @@ import { AffirmationService } from '../affirmation.service';
 @Component({
   selector: 'ezo-affirmation-list',
   templateUrl: './affirmation-list.component.html',
-  styleUrls: ['./affirmation-list.component.scss']
+  styleUrls: ['./affirmation-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AffirmationListComponent {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
@@ -18,9 +20,17 @@ export class AffirmationListComponent {
   affirmations: any;
   isAllChecked: boolean = false;
   isButtonEnabled: boolean = false;
+
+  affirmationForm = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl(''),
+    type: new FormControl(''),
+    imagePath: new FormControl('')
+  });
   constructor(
-    private affService: AffirmationService,
-    private modalService: NgbModal
+    public affService: AffirmationService,
+    private modalService: NgbModal,
+    private fb: FormBuilder
   ) {
     this.affirmations$.subscribe((affirmations: Affirmation[]) => {
       this.affirmations = affirmations.reduce(
@@ -42,6 +52,10 @@ export class AffirmationListComponent {
   }
   onAffirmationChecked(foundId: string, value: boolean) {
     this.affirmations[foundId].checked = value;
+    console.log(this.affirmations);
+    this.isAllChecked = Object.keys(this.affirmations)?.every((id) => {
+      return this.affirmations[id]?.checked === true;
+    });
 
     this.onButtonEnable();
   }
@@ -60,8 +74,17 @@ export class AffirmationListComponent {
   deleteDocByID() {
     return this.affService.deleteDocByID(this.affirmations);
   }
-
+  openModal(exampleModalContent) {
+    this.modalService.open(exampleModalContent, { size: 'lg' });
+  }
   openSmallModal(smallModalContent) {
     this.modalService.open(smallModalContent, { size: 'sm' });
+  }
+
+  onSubmitAffirmation() {
+    console.log(this.affirmationForm.value);
+    this.affService.createDoc(this.affirmationForm.value);
+    this.affirmationForm.reset();
+    this.modalService.dismissAll();
   }
 }

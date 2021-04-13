@@ -3,9 +3,68 @@
     <div class="card-body">
       <h4 class="card-title">Your Affirmations</h4>
       <p class="card-description">Play with them!</p>
-      <button type="button" class="btn btn-inverse-success btn-fw">
+      <button
+        type="button"
+        class="btn btn-inverse-success btn-fw"
+        (click)="openModal(exampleModalContent)"
+      >
         New Affirmation
       </button>
+
+      <ng-template class="modal fade" #exampleModalContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Create New Affirmation
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="modal.dismiss()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+              [formGroup]="affirmationForm"
+              (ngSubmit)="onSubmitAffirmation()"
+            >
+              <label>
+                Affirmation Title:
+                <input type="text" formControlName="name" />
+              </label>
+
+              <label>
+                Affirmation Description:
+                <input type="text" formControlName="description" />
+              </label>
+              <label>
+                Insert link to image of your Affirmation:
+                <input type="text" formControlName="imagePath" />
+              </label>
+              <label>
+                Affirmation Type:
+                <input type="text" formControlName="type" />
+              </label>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  data-dismiss="modal"
+                  (click)="modal.close()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-template>
       <br />
       <div class="delete-section">
         <button
@@ -41,6 +100,7 @@
               <button
                 type="button"
                 class="btn btn-danger"
+                (click)="deleteDocByID()"
                 (click)="modal.close()"
               >
                 Yes
@@ -70,6 +130,7 @@
           ></i>
         </button>
       </div>
+
       <ezo-affirmation-item
         *ngFor="let affirmationEl of affirmations$ | async"
         [affirmation]="affirmationEl"

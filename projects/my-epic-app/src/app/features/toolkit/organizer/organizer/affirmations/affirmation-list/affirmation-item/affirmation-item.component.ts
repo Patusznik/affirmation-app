@@ -21,13 +21,15 @@ export class AffirmationItemComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private affService: AffirmationService
+    public affService: AffirmationService
   ) {}
 
   ngOnInit(): void {}
 
   @HostListener('click', ['$event'])
-  onSelected(event: Event) {}
+  onSelected(event: Event) {
+    this.affirmationSelected.emit();
+  }
 
   checkUncheck() {
     this.affirmationChecked.emit(!this.checked);

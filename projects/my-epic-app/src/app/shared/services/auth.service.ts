@@ -21,9 +21,7 @@ export class AuthService {
   usersAffirmations$: Observable<any>;
   userAffirmationsForEdit$: Observable<any>;
   userUID: string;
-  // private affPath = '/affirmations';
 
-  // affirmationsRef: AngularFirestoreCollection<Affirmation> = null;
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
