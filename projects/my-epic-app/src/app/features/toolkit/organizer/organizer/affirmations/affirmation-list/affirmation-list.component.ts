@@ -20,7 +20,8 @@ export class AffirmationListComponent {
   affirmations: any;
   isAllChecked: boolean = false;
   isButtonEnabled: boolean = false;
-
+  p: number = 1;
+  collection = [];
   affirmationForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
@@ -39,6 +40,9 @@ export class AffirmationListComponent {
         {}
       );
       console.log(this.affirmations);
+      for (let i = 1; i <= 100; i++) {
+        this.collection.push(this.affirmations);
+      }
     });
   }
 

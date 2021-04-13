@@ -5,12 +5,20 @@
       <p class="card-description">Play with them!</p>
       <button
         type="button"
-        class="btn btn-inverse-success btn-fw"
+        class="btn btn-inverse-success btn-rounded btn-icon"
         (click)="openModal(exampleModalContent)"
       >
-        New Affirmation
+        <i class="mdi mdi-plus-circle"></i>
       </button>
 
+      <button
+        type="button"
+        class="btn btn-inverse-danger btn-rounded btn-icon"
+        (click)="openSmallModal(smallModalContent)"
+        [disabled]="!isButtonEnabled"
+      >
+        <i class="mdi mdi-delete"></i>
+      </button>
       <ng-template class="modal fade" #exampleModalContent let-modal>
         <div class="modal-content">
           <div class="modal-header">
@@ -65,79 +73,82 @@
           </div>
         </div>
       </ng-template>
-      <br />
-      <div class="delete-section">
-        <button
-          type="button"
-          class="btn btn-inverse-danger btn-fw"
-          (click)="openSmallModal(smallModalContent)"
-          [disabled]="!isButtonEnabled"
-        >
-          Delete Affirmation
-        </button>
-        <ng-template
-          #smallModalContent
-          let-modal
-          class="modal fade"
-          aria-labelledby="exampleModalLabel-3"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel-3">Warning!</h5>
-              <button
-                type="button"
-                class="close"
-                (click)="modal.dismiss()"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete affirmation(s)?</p>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="deleteDocByID()"
-                (click)="modal.close()"
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                class="btn btn-light"
-                (click)="modal.close()"
-              >
-                Cancel
-              </button>
-            </div>
+      <ng-template
+        #smallModalContent
+        let-modal
+        class="modal fade"
+        aria-labelledby="exampleModalLabel-3"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel-3">Warning!</h5>
+            <button
+              type="button"
+              class="close"
+              (click)="modal.dismiss()"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </ng-template>
-        <button
-          type="button"
-          class="btn btn-inverse-info btn-icon"
-          (click)="checkUncheckAll(!isAllChecked)"
-        >
-          <i
-            class="mdi"
-            [ngClass]="[
-              isAllChecked && isButtonEnabled
-                ? 'mdi-check-circle'
-                : 'mdi-checkbox-blank-circle-outline'
-            ]"
-          ></i>
-        </button>
-      </div>
-
-      <ezo-affirmation-item
-        *ngFor="let affirmationEl of affirmations$ | async"
-        [affirmation]="affirmationEl"
-        [checked]="isChecked(affirmationEl.id)"
-        (affirmationSelected)="onAffirmationSelected(affirmationEl)"
-        (affirmationChecked)="onAffirmationChecked(affirmationEl.id, $event)"
-      ></ezo-affirmation-item>
+          <div class="modal-body">
+            <p>Are you sure you want to delete affirmation(s)?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteDocByID()"
+              (click)="modal.close()"
+            >
+              Yes
+            </button>
+            <button type="button" class="btn btn-light" (click)="modal.close()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <button
+        type="button"
+        class="btn btn-inverse-info btn-icon"
+        (click)="checkUncheckAll(!isAllChecked)"
+      >
+        <i
+          class="mdi"
+          [ngClass]="[
+            isAllChecked && isButtonEnabled
+              ? 'mdi-check-circle'
+              : 'mdi-checkbox-blank-circle-outline'
+          ]"
+        ></i>
+      </button>
     </div>
+    <!-- <div class="list">
+        <ul>
+          <li
+            *ngFor="
+              let item of affirmations$
+                | async
+                | paginate: { itemsPerPage: 5, currentPage: p }
+            "
+          >
+            {{ item.name }}
+          </li>
+        </ul> -->
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <!-- </div> -->
+    <ezo-affirmation-item
+      *ngFor="
+        let affirmationEl of affirmations$
+          | async
+          | paginate: { itemsPerPage: 5, currentPage: p }
+      "
+      [affirmation]="affirmationEl"
+      [checked]="isChecked(affirmationEl.id)"
+      (affirmationSelected)="onAffirmationSelected(affirmationEl)"
+      (affirmationChecked)="onAffirmationChecked(affirmationEl.id, $event)"
+    ></ezo-affirmation-item>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { AffirmationDetailComponent } from './organizer/affirmations/affirmation-detail/affirmation-detail.component';
@@ -34,7 +35,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ]
 })
 export class OrganizerModule {}
