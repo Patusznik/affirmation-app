@@ -33,5 +33,6 @@ export class AffirmationItemComponent implements OnInit {
 
   checkUncheck() {
     this.affirmationChecked.emit(!this.checked);
+    console.log(this.checked);
   }
 }

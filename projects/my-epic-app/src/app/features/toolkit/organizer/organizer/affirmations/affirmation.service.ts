@@ -12,6 +12,9 @@ import { Affirmation } from './affirmation.model';
 })
 export class AffirmationService {
   kotek: Observable<Affirmation[]> = this.auth.usersAffirmations$;
+  generalAffirmations: Observable<Affirmation[]> = this.afs
+    .collection<any>('affirmations')
+    .valueChanges();
   affRef: Observable<any> = this.auth.userAffirmationsForEdit$;
   user$: Observable<User> = this.auth.user$;
   userUID: string = this.auth.userUID;

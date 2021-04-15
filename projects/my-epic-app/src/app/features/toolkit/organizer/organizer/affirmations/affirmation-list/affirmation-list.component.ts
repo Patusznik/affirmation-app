@@ -16,11 +16,15 @@ export class AffirmationListComponent {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
 
   affirmations$: Observable<Affirmation[]> = this.affService.kotek;
-
+  generalAffirmations$: Observable<Affirmation[]> = this.affService
+    .generalAffirmations;
   affirmations: any;
   isAllChecked: boolean = false;
   isButtonEnabled: boolean = false;
+
+  lightbulbed: boolean = false;
   p: number = 1;
+  p2: number = 1;
   collection = [];
   affirmationForm = new FormGroup({
     name: new FormControl(''),
@@ -40,12 +44,12 @@ export class AffirmationListComponent {
         {}
       );
       console.log(this.affirmations);
-      for (let i = 1; i <= 100; i++) {
-        this.collection.push(this.affirmations);
-      }
     });
   }
-
+  lightOnOff() {
+    this.lightbulbed = !this.lightbulbed;
+    console.log(this.lightbulbed);
+  }
   onButtonEnable() {
     this.isButtonEnabled = Object.keys(this.affirmations)?.some((id) => {
       return this.affirmations[id]?.checked === true;
