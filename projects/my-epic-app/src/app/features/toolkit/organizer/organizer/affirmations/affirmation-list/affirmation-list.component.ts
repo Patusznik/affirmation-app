@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -19,6 +20,8 @@ export class AffirmationListComponent {
   generalAffirmations$: Observable<Affirmation[]> = this.affService
     .generalAffirmations;
   affirmations: any;
+  generalAffirmations: any;
+
   isAllChecked: boolean = false;
   isButtonEnabled: boolean = false;
 
@@ -35,6 +38,7 @@ export class AffirmationListComponent {
   constructor(
     public affService: AffirmationService,
     private modalService: NgbModal,
+    private afs: AngularFirestore,
     private fb: FormBuilder
   ) {
     this.affirmations$.subscribe((affirmations: Affirmation[]) => {
@@ -45,42 +49,78 @@ export class AffirmationListComponent {
       );
       console.log(this.affirmations);
     });
+    this.generalAffirmations$.subscribe((affirmations: Affirmation[]) => {
+      this.generalAffirmations = affirmations.reduce(
+        (ac, { id }) => ((ac[id] = { checked: false }), ac),
+
+        {}
+      );
+      console.log(this.generalAffirmations);
+    });
   }
   lightOnOff() {
     this.lightbulbed = !this.lightbulbed;
     console.log(this.lightbulbed);
   }
-  onButtonEnable() {
-    this.isButtonEnabled = Object.keys(this.affirmations)?.some((id) => {
-      return this.affirmations[id]?.checked === true;
+  onButtonEnable(affirmations) {
+    this.isButtonEnabled = Object.keys(affirmations)?.some((id) => {
+      return affirmations[id]?.checked === true;
     });
   }
   onAffirmationSelected(affirmation: Affirmation) {
     this.affirmationWasSelected.emit(affirmation);
   }
-  onAffirmationChecked(foundId: string, value: boolean) {
-    this.affirmations[foundId].checked = value;
-    console.log(this.affirmations);
-    this.isAllChecked = Object.keys(this.affirmations)?.every((id) => {
-      return this.affirmations[id]?.checked === true;
+  onAffirmationChecked(foundId: string, value: boolean, aff) {
+    aff[foundId].checked = value;
+    console.log(aff);
+    this.isAllChecked = Object.keys(aff)?.every((id) => {
+      return aff[id]?.checked === true;
     });
 
-    this.onButtonEnable();
+    this.onButtonEnable(aff);
   }
 
-  isChecked(foundId: string): boolean {
-    return this.affirmations[foundId].checked;
+  isChecked(foundId: string, aff): boolean {
+    return aff[foundId].checked;
   }
 
-  checkUncheckAll(value: boolean) {
+  checkUncheckAll(value: boolean, aff) {
     this.isAllChecked = value;
-    Object.keys(this.affirmations).forEach((id) => {
-      this.affirmations[id].checked = value;
-      this.onButtonEnable();
+    Object.keys(aff).forEach((id) => {
+      aff[id].checked = value;
+      this.onButtonEnable(aff);
     });
   }
   deleteDocByID() {
     return this.affService.deleteDocByID(this.affirmations);
+  }
+
+  copyDocByID() {
+    const affirmationIDsToCopy = Object.keys(this.generalAffirmations)?.filter(
+      (id) => {
+        return this.generalAffirmations[id]?.checked === true;
+      }
+    );
+    affirmationIDsToCopy.forEach((id) => {
+      this.afs
+        .collection('affirmations')
+        .doc(id)
+        .get()
+        .toPromise()
+        .then((docRef) => {
+          const affirmationData = docRef.data();
+          const copiedAffirmation = {
+            name: affirmationData['name'],
+            description: affirmationData['description'],
+            type: affirmationData['type'],
+            imagePath: affirmationData['imagePath']
+          };
+          this.affService.createDoc(copiedAffirmation);
+        })
+        .catch((error) => {});
+    });
+
+    // return this.affService.createDoc(this.generalAffirmations);
   }
   openModal(exampleModalContent) {
     this.modalService.open(exampleModalContent, { size: 'lg' });

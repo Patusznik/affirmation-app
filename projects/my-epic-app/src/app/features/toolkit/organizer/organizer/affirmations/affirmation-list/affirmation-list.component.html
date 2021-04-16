@@ -43,7 +43,7 @@
         <button
           type="button"
           class="btn btn-inverse-info btn-icon"
-          (click)="checkUncheckAll(!isAllChecked)"
+          (click)="checkUncheckAll(!isAllChecked, affirmations)"
         >
           <i
             class="mdi"
@@ -70,9 +70,11 @@
               | paginate: { itemsPerPage: 5, currentPage: p, id: 'first' }
           "
           [affirmation]="affirmationEl"
-          [checked]="isChecked(affirmationEl.id)"
+          [checked]="isChecked(affirmationEl.id, affirmations)"
           (affirmationSelected)="onAffirmationSelected(affirmationEl)"
-          (affirmationChecked)="onAffirmationChecked(affirmationEl.id, $event)"
+          (affirmationChecked)="
+            onAffirmationChecked(affirmationEl.id, $event, affirmations)
+          "
         ></ezo-affirmation-item>
       </div>
     </div>
@@ -87,7 +89,7 @@
   <button
     type="button"
     class="btn btn-inverse-info btn-icon"
-    (click)="checkUncheckAll(!isAllChecked)"
+    (click)="checkUncheckAll(!isAllChecked, generalAffirmations)"
   >
     <i
       class="mdi"
@@ -100,11 +102,11 @@
   </button>
   <button
     type="button"
-    class="btn btn-inverse-danger btn-rounded btn-icon"
-    (click)="openSmallModal(smallModalContent)"
+    class="btn btn-inverse-primary btn-rounded btn-icon"
+    (click)="copyDocByID()"
     [disabled]="!isButtonEnabled"
   >
-    <i class="mdi mdi-delete"></i>
+    <i class="mdi mdi-content-duplicate"></i>
   </button>
   <ezo-affirmation-item
     *ngFor="
@@ -113,9 +115,11 @@
         | paginate: { itemsPerPage: 5, currentPage: p2, id: 'second' }
     "
     [affirmation]="affirmationEl"
-    [checked]="isChecked(affirmationEl.id)"
+    [checked]="isChecked(affirmationEl.id, generalAffirmations)"
     (affirmationSelected)="onAffirmationSelected(affirmationEl)"
-    (affirmationChecked)="onAffirmationChecked(affirmationEl.id, $event)"
+    (affirmationChecked)="
+      onAffirmationChecked(affirmationEl.id, $event, generalAffirmations)
+    "
   ></ezo-affirmation-item>
 </ng-template>
 
