@@ -1,8 +1,5 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { User } from 'projects/my-epic-app/src/app/shared/services/user';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
-import { AuthService } from '../../../../../../../shared/services/auth.service';
 import { Affirmation } from '../../affirmation.model';
 import { AffirmationService } from '../../affirmation.service';
 
@@ -11,28 +8,21 @@ import { AffirmationService } from '../../affirmation.service';
   templateUrl: './affirmation-item.component.html',
   styleUrls: ['./affirmation-item.component.scss']
 })
-export class AffirmationItemComponent implements OnInit {
+export class AffirmationItemComponent {
   @Input() affirmation: Affirmation;
   @Input() checked: boolean = false;
   @Output() affirmationSelected = new EventEmitter<void>();
   @Output() affirmationChecked = new EventEmitter<boolean>();
 
-  user$: Observable<User> = this.auth.user$;
-
-  constructor(
-    private auth: AuthService,
-    public affService: AffirmationService
-  ) {}
-
-  ngOnInit(): void {}
+  constructor(public affService: AffirmationService) {}
 
   @HostListener('click', ['$event'])
   onSelected(event: Event) {
     this.affirmationSelected.emit();
   }
 
-  checkUncheck() {
+  checkUncheck(event: Event) {
+    event.stopPropagation();
     this.affirmationChecked.emit(!this.checked);
-    console.log(this.checked);
   }
 }

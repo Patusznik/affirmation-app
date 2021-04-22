@@ -2,7 +2,7 @@
   <button
     type="button"
     class="btn btn-inverse-info btn-icon"
-    (click)="checkUncheck()"
+    (click)="checkUncheck($event)"
   >
     <i
       class="mdi"
@@ -13,7 +13,7 @@
   </button>
   <img [src]="affirmation.imagePath" alt="sample image" />
 
-  <p [ngClass]="{ lighted: checked }">
-    {{ affirmation.description }}
+  <p>
+    {{ affirmation.name }}
   </p>
 </div>

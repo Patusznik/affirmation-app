@@ -25,16 +25,12 @@ export class AffirmationService {
 
   deleteDocByID(aff: any) {
     console.log(this.userUID);
-    Object.keys(aff).forEach((id) => {
-      if (aff[id].checked === true) {
-        return this.afs
-          .doc<User>(`users/${this.userUID}`)
-          .collection<any>('affirmations')
-          .doc<Affirmation>(id)
-          .delete();
-      } else {
-        return console.log('not deleted');
-      }
+    aff.forEach((id) => {
+      this.afs
+        .doc<User>(`users/${this.userUID}`)
+        .collection<any>('affirmations')
+        .doc<Affirmation>(id)
+        .delete();
     });
   }
   createDoc(aff: any) {
@@ -52,6 +48,27 @@ export class AffirmationService {
             createdAt: firebase.firestore.Timestamp.fromDate(new Date())
           })
       );
+  }
+
+  copyDoc(aff: any) {
+    aff.forEach((id) => {
+      this.afs
+        .collection('affirmations')
+        .doc(id)
+        .get()
+        .toPromise()
+        .then((docRef) => {
+          const affirmationData = docRef.data();
+          const copiedAffirmation = {
+            name: affirmationData['name'],
+            description: affirmationData['description'],
+            type: affirmationData['type'],
+            imagePath: affirmationData['imagePath']
+          };
+          this.createDoc(copiedAffirmation);
+        })
+        .catch((error) => {});
+    });
   }
   // updateDocByID(id: string, value: boolean) {
   //   console.log(this.userUID);

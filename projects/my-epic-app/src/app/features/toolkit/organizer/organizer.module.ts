@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -36,7 +37,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     SharedModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSnackBarModule
   ]
 })
 export class OrganizerModule {}
