@@ -7,6 +7,7 @@
 .navbar {
   font-family: $type1-light;
   background: $navbar-bg;
+  background-color: #d0e8f2;
   transition: background $action-transition-duration
     $action-transition-timing-function;
   -webkit-transition: background $action-transition-duration
@@ -35,6 +36,7 @@
     background: $navbar-bg;
     width: $sidebar-width-lg;
     height: $navbar-height;
+    background-color: #d0e8f2;
 
     @media (max-width: 991px) {
       width: 55px;
@@ -46,6 +48,7 @@
       margin-right: 0;
       padding: 0.25rem 0;
       width: 100%;
+      background-color: #d0e8f2;
 
       &:active,
       &:focus,
@@ -271,6 +274,7 @@
                 width: 32px;
                 height: 32px;
                 border-radius: 100%;
+                object-fit: cover;
               }
               .availability-status {
                 position: absolute;
@@ -330,10 +334,14 @@
     .navbar-brand-wrapper {
       width: 75px;
       .navbar-brand {
+        background-color: #d0e8f2;
         &.brand-logo {
           display: none;
+          background-color: #d0e8f2;
         }
         &.brand-logo-mini {
+          background-color: #d0e8f2;
+
           display: inline-block;
         }
       }

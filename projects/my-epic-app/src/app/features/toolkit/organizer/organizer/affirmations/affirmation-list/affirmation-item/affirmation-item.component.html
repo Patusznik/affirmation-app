@@ -1,14 +1,19 @@
-<!-- <a class="list-container"> -->
-<div class="to-left">
-  <h4 class="item-name">{{ affirmation.name }}</h4>
-  <p class="item-desc">{{ affirmation.description }}</p>
+<div class="list-element">
+  <button
+    type="button"
+    class="btn btn-inverse-info btn-icon"
+    (click)="checkUncheck($event)"
+  >
+    <i
+      class="mdi"
+      [ngClass]="[
+        checked ? 'mdi-check-circle' : 'mdi-checkbox-blank-circle-outline'
+      ]"
+    ></i>
+  </button>
+  <img [src]="affirmation.imagePath" alt="sample image" />
+
+  <p>
+    {{ affirmation.name }}
+  </p>
 </div>
-<span class="to-right">
-  <img
-    style="cursor: pointer"
-    [src]="affirmation.imagePath"
-    alt="{{ affirmation.name }}"
-    style="max-height: 50px"
-  />
-</span>
-<!-- </a> -->

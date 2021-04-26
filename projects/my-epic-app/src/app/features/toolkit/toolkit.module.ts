@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../../shared/guard/auth.guard';
 import { SharedModule } from '../../shared/shared.module';
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./organizer/organizer.module').then((m) => m.OrganizerModule)
       }
-    ]
+    ],
+    canActivate: [AuthGuard]
   }
 ];
 

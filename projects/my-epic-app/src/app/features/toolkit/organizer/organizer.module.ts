@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { AffirmationDetailComponent } from './organizer/affirmations/affirmation-detail/affirmation-detail.component';
@@ -26,6 +30,15 @@ const routes: Routes = [
     AffirmationListComponent,
     AffirmationDetailComponent
   ],
-  imports: [RouterModule.forChild(routes), CommonModule, SharedModule]
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    NgbModule,
+    NgxPaginationModule,
+    MatSnackBarModule
+  ]
 })
 export class OrganizerModule {}

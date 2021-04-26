@@ -1,17 +1,26 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item nav-profile">
-      <a href="javascript:;" class="nav-link">
+      <a
+        *ngIf="auth.user$ | async as user"
+        routerLink="/profile"
+        class="nav-link"
+      >
         <div class="nav-profile-image">
-          <img src="assets/images/faces/face1.jpg" alt="profile" />
+          <img [src]="user.photoURL" alt="profile" />
           <span class="login-status online"></span>
           <!--change to offline or busy as needed-->
         </div>
         <div class="nav-profile-text">
-          <span class="font-weight-bold mb-2">David Grey. H</span>
-          <span class="text-secondary text-small">Project Manager</span>
+          <span class="font-weight-bold mb-2"
+            >{{ user.displayName }}
+            <i
+              class="mdi mdi-bookmark-check text-success nav-profile-badge"
+            ></i>
+          </span>
+
+          <span class="text-secondary text-small">{{ user.email }}</span>
         </div>
-        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ active: dashboard.isActive }">
@@ -83,7 +92,7 @@
         #transerfing="routerLinkActive"
       >
         <span class="menu-title">Transerfing</span>
-        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+        <i class="mdi mdi-emoticon-cool menu-icon"></i>
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ active: lawofattraction.isActive }">
@@ -94,18 +103,18 @@
         #lawofattraction="routerLinkActive"
       >
         <span class="menu-title">Law of Attraction</span>
-        <i class="mdi mdi-chart-bar menu-icon"></i>
+        <i class="mdi mdi-emoticon menu-icon"></i>
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ active: settings.isActive }">
       <a
         class="nav-link"
-        routerLink="tables/basic-table"
+        routerLink="profile"
         routerLinkActive
         #settings="routerLinkActive"
       >
         <span class="menu-title">Settings</span>
-        <i class="mdi mdi-table-large menu-icon"></i>
+        <i class="mdi mdi-wrench menu-icon"></i>
       </a>
     </li>
   </ul>

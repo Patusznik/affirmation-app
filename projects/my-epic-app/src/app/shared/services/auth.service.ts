@@ -19,6 +19,9 @@ import { User } from '../services/user';
 export class AuthService {
   user$: Observable<User>;
   usersAffirmations$: Observable<any>;
+  userAffirmationsForEdit$: Observable<any>;
+  userUID: string;
+
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -29,6 +32,7 @@ export class AuthService {
       switchMap((user) => {
         // Logged in
         if (user) {
+          this.userUID = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
@@ -45,6 +49,21 @@ export class AuthService {
             .doc<User>(`users/${user.uid}`)
             .collection<any>('affirmations')
             .valueChanges();
+        } else {
+          // Logged out
+          return of(null);
+        }
+      })
+    );
+
+    this.userAffirmationsForEdit$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        // Logged in
+        if (user) {
+          return this.afs
+            .doc<User>(`users/${user.uid}`)
+            .collection<any>('affirmations')
+            .snapshotChanges();
         } else {
           // Logged out
           return of(null);
