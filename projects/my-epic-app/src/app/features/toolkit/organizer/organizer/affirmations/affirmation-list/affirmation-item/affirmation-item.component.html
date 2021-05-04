@@ -1,19 +1,32 @@
 <div class="list-element">
-  <button
-    type="button"
-    class="btn btn-inverse-info btn-icon"
-    (click)="checkUncheck($event)"
-  >
-    <i
-      class="mdi"
-      [ngClass]="[
-        checked ? 'mdi-check-circle' : 'mdi-checkbox-blank-circle-outline'
-      ]"
-    ></i>
-  </button>
-  <img [src]="affirmation.imagePath" alt="sample image" />
+  <h3>{{ affirmation.name }}</h3>
+  <div class="aff-elements">
+    <button
+      type="button"
+      class="btn btn-inverse-info btn-icon"
+      (click)="checkUncheck($event)"
+    >
+      <i
+        class="mdi"
+        [ngClass]="[
+          checked ? 'mdi-check-circle' : 'mdi-checkbox-blank-circle-outline'
+        ]"
+      ></i>
+    </button>
 
-  <p>
-    {{ affirmation.name }}
-  </p>
+    <img [src]="affirmation.imagePath" alt="sample image" />
+    <p>Goal date:<br />date or null</p>
+    <p>
+      Created at:<br />{{
+        affirmation.createdAt.toDate().getDate() +
+          '/' +
+          affirmation.createdAt.toDate().getMonth() +
+          '/' +
+          affirmation.createdAt.toDate().getFullYear()
+      }}
+    </p>
+    <div class="badge badge-pill" [ngClass]="affirmation.type">
+      {{ affirmation.type }}
+    </div>
+  </div>
 </div>

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
+import { ModalService } from '../../../../../../shared/modal/modal.service';
 import { Affirmation } from '../affirmation.model';
 import { AffirmationService } from '../affirmation.service';
 
@@ -16,10 +16,29 @@ import { AffirmationService } from '../affirmation.service';
 export class AffirmationListComponent {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
 
-  affirmations$: Observable<Affirmation[]> = this.affService.kotek;
+  affirmations$: Observable<Affirmation[]> = this.affService.userAffirmations$;
   generalAffirmations$: Observable<Affirmation[]> = this.affService
-    .generalAffirmations;
+    .generalAffirmations$;
 
+  types: any[] = [
+    { type: 'work' },
+    { type: 'sport' },
+    { type: 'home' },
+    { type: 'place' },
+    { type: 'holiday' },
+    { type: 'animals' },
+    { type: 'self-development' },
+    { type: 'music' },
+    { type: 'health' },
+    { type: 'appearance' },
+    { type: 'well-being' },
+    { type: 'meditation' },
+    { type: 'relationships' },
+    { type: 'hobby' },
+    { type: 'mood' },
+    { type: 'motivation' },
+    { type: 'habit' }
+  ];
   affirmations: any;
   generalAffirmations: any;
 
@@ -40,7 +59,7 @@ export class AffirmationListComponent {
   });
   constructor(
     public affService: AffirmationService,
-    private modalService: NgbModal,
+    private modalService: ModalService,
 
     private _snackBar: MatSnackBar
   ) {
@@ -126,13 +145,16 @@ export class AffirmationListComponent {
       return aff[id]?.checked === true;
     });
   }
-  openModal(exampleModalContent) {
-    this.modalService.open(exampleModalContent, { size: 'lg' });
+  openModal(id: string) {
+    this.modalService.open(id);
   }
 
-  openSmallModal(smallModalContent) {
-    this.modalService.open(smallModalContent, { size: 'sm' });
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
+  // openSmallModal(smallModalContent) {
+  //   this.modalService.open(smallModalContent, { size: 'sm' });
+  // }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -143,6 +165,6 @@ export class AffirmationListComponent {
   onSubmitAffirmation() {
     this.affService.createDoc(this.affirmationForm.value);
     this.affirmationForm.reset();
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
   }
 }
