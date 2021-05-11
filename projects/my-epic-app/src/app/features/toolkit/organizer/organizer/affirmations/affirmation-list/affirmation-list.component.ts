@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
@@ -15,52 +15,30 @@ import { AffirmationService } from '../affirmation.service';
 })
 export class AffirmationListComponent {
   @Output() affirmationWasSelected = new EventEmitter<Affirmation>();
+  @Input() types: any[];
+  @Input() affirmationForm: FormGroup;
+  @Output() isLightBulbedEvent = new EventEmitter<boolean>();
 
   affirmations$: Observable<Affirmation[]> = this.affService.userAffirmations$;
   generalAffirmations$: Observable<Affirmation[]> = this.affService
     .generalAffirmations$;
 
-  types: any[] = [
-    { type: 'work' },
-    { type: 'sport' },
-    { type: 'home' },
-    { type: 'place' },
-    { type: 'holiday' },
-    { type: 'animals' },
-    { type: 'self-development' },
-    { type: 'music' },
-    { type: 'health' },
-    { type: 'appearance' },
-    { type: 'well-being' },
-    { type: 'meditation' },
-    { type: 'relationships' },
-    { type: 'hobby' },
-    { type: 'mood' },
-    { type: 'motivation' },
-    { type: 'habit' }
-  ];
   affirmations: any;
   generalAffirmations: any;
 
   isAllChecked: boolean = false;
   isButtonEnabled: boolean = false;
-  lightbulbed: boolean = false;
+  isLightBulbed: boolean = false;
+  kociak: boolean = true;
 
   numberOfChoosedAffirmations: string;
 
   p: number = 1;
   p2: number = 1;
 
-  affirmationForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    type: new FormControl(''),
-    imagePath: new FormControl('')
-  });
   constructor(
     public affService: AffirmationService,
     private modalService: ModalService,
-
     private _snackBar: MatSnackBar
   ) {
     this.affirmations$.subscribe((affirmations: Affirmation[]) => {
@@ -80,7 +58,8 @@ export class AffirmationListComponent {
   }
 
   lightOnOff() {
-    this.lightbulbed = !this.lightbulbed;
+    this.isLightBulbed = !this.isLightBulbed;
+    this.isLightBulbedEvent.emit(this.isLightBulbed);
   }
 
   onButtonEnable(affirmations) {
@@ -122,7 +101,7 @@ export class AffirmationListComponent {
     affirmationIDsToDelete.forEach((id) => {
       this.affirmations[id].checked = false;
     });
-    return this.affService.deleteDocByID(affirmationIDsToDelete);
+    return this.affService.deleteDocsByID(affirmationIDsToDelete);
   }
 
   copyDocByID() {
@@ -137,7 +116,7 @@ export class AffirmationListComponent {
       this.generalAffirmations[id].checked = false;
     });
 
-    return this.affService.copyDoc(affirmationIDsToCopy);
+    return this.affService.copyDocsByID(affirmationIDsToCopy);
   }
 
   filterAffirmationIDs(aff: any) {
@@ -146,15 +125,12 @@ export class AffirmationListComponent {
     });
   }
   openModal(id: string) {
-    this.modalService.open(id);
+    this.affService.openModal(id);
   }
 
   closeModal(id: string) {
-    this.modalService.close(id);
+    this.affService.closeModal(id);
   }
-  // openSmallModal(smallModalContent) {
-  //   this.modalService.open(smallModalContent, { size: 'sm' });
-  // }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -165,6 +141,5 @@ export class AffirmationListComponent {
   onSubmitAffirmation() {
     this.affService.createDoc(this.affirmationForm.value);
     this.affirmationForm.reset();
-    // this.modalService.dismissAll();
   }
 }

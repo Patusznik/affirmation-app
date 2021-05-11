@@ -12,12 +12,128 @@
   <mat-card-content>
     <p>{{ affirmation.description }}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button type="button" class="btn btn-inverse-success btn-rounded btn-fw">
+  <mat-card-actions *ngIf="!lightbulbed; else nothing">
+    <button
+      type="button"
+      class="btn btn-inverse-success btn-rounded btn-fw"
+      (click)="openModal('edit-affirmation-modal')"
+    >
       Edit Affirmation
     </button>
-    <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw">
+    <button
+      type="button"
+      class="btn btn-inverse-danger btn-rounded btn-fw"
+      (click)="openModal('delete-affirmation-modal')"
+    >
       Delete Affirmation
     </button>
+
+    <button
+      type="button"
+      class="btn btn-inverse-primary btn-rounded btn-icon"
+      (click)="openModal('share-affirmation-modal')"
+    >
+      <i class="mdi mdi-share"></i>
+    </button>
   </mat-card-actions>
+  <ng-template #nothing></ng-template>
 </mat-card>
+<ezo-modal id="edit-affirmation-modal">
+  <h2>Add Your Affirmation!</h2>
+  <form
+    [formGroup]="affirmationForm"
+    (ngSubmit)="onSubmitAffirmation(affirmation.id)"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>{{ affirmation.name }}</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ affirmation.type }}</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let o of types" [value]="o?.type">{{
+          o?.type
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ affirmation.description }}</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ affirmation.imagePath }}</mat-label>
+      <input matInput formControlName="imagePath" />
+    </mat-form-field>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="closeModal('edit-affirmation-modal')"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="closeModal('edit-affirmation-modal')"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ezo-modal>
+<ezo-modal id="delete-affirmation-modal">
+  <h2>Warning!</h2>
+
+  <p>Are you sure you want to delete affirmation?</p>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="deleteDoc(affirmation.id)"
+      (click)="openSnackBar('Affirmation deleted', 'Dismiss')"
+      (click)="closeModal('delete-affirmation-modal')"
+    >
+      Yes
+    </button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="closeModal('delete-affirmation-modal')"
+    >
+      Cancel
+    </button>
+  </div>
+</ezo-modal>
+<ezo-modal id="share-affirmation-modal">
+  <h2 *ngIf="affService.user$ | async as user; else usergreet">
+    Dear {{ user.displayName }}!
+  </h2>
+  <ng-template #usergreet><h2>Dear Lightworker!</h2></ng-template>
+
+  <p>
+    Are you ready to share your affirmation with the rest of the community?<br />
+    💥💥💥 This action can't be changed! Make sure you really want to publish
+    it!💥💥💥
+  </p>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="shareDoc(affirmation)"
+      (click)="openSnackBar('Affirmation shared', 'Dismiss')"
+      (click)="closeModal('share-affirmation-modal')"
+    >
+      Yes
+    </button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="closeModal('share-affirmation-modal')"
+    >
+      Cancel
+    </button>
+  </div>
+</ezo-modal>

@@ -1,10 +1,20 @@
 <div class="container">
   <ezo-affirmation-list
     (affirmationWasSelected)="selectAffirmation($event)"
+    [types]="types"
+    [affirmationForm]="affirmationForm"
+    (isLightBulbedEvent)="turnOnLightBulb($event)"
   ></ezo-affirmation-list>
   <ezo-affirmation-detail
     *ngIf="selectedAffirmation; else nothing"
+    (affirmationToDelete)="deleteDetailComponent($event)"
     [affirmation]="selectedAffirmation"
+    [types]="types"
+    [affirmationForm]="affirmationForm"
+    [lightbulbed]="lightbulbed"
   ></ezo-affirmation-detail>
   <ng-template #nothing></ng-template>
 </div>
+<!-- <div class="menu" *ngIf="kociak" (clickOutside)="onKotekLog()" #menu>
+  I'm the menu. Click outside to close me
+</div> -->

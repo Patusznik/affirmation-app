@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import { User } from 'projects/my-epic-app/src/app/shared/services/user';
 import { Observable } from 'rxjs';
 
+import { ModalService } from '../../../../../shared/modal/modal.service';
 import { AuthService } from '../../../../../shared/services/auth.service';
 import { Affirmation } from './affirmation.model';
 
@@ -18,11 +19,23 @@ export class AffirmationService {
   user$: Observable<User> = this.auth.user$;
   userUID: string = this.auth.userUID;
 
-  constructor(private afs: AngularFirestore, private auth: AuthService) {
+  constructor(
+    private afs: AngularFirestore,
+    private auth: AuthService,
+    private modalService: ModalService
+  ) {
     // initially load first 5 records/items from database
   }
 
-  deleteDocByID(aff: any) {
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
+  deleteDocsByID(aff: any) {
     console.log(this.userUID);
     aff.forEach((id) => {
       this.afs
@@ -31,6 +44,29 @@ export class AffirmationService {
         .doc<Affirmation>(id)
         .delete();
     });
+  }
+
+  deleteDoc(id: string) {
+    return this.afs
+      .doc<User>(`users/${this.userUID}`)
+      .collection<any>('affirmations')
+      .doc<Affirmation>(id)
+      .delete();
+  }
+
+  shareDoc(aff: any) {
+    return this.afs
+      .collection<any>('affirmations')
+      .add(aff)
+      .then((docRef) =>
+        this.afs
+          .collection<any>('affirmations')
+          .doc<Affirmation>(docRef.id)
+          .update({
+            id: docRef.id,
+            createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+          })
+      );
   }
   createDoc(aff: any) {
     return this.afs
@@ -49,7 +85,7 @@ export class AffirmationService {
       );
   }
 
-  copyDoc(aff: any) {
+  copyDocsByID(aff: any) {
     aff.forEach((id) => {
       this.afs
         .collection('affirmations')
@@ -69,12 +105,12 @@ export class AffirmationService {
         .catch((error) => {});
     });
   }
-  // updateDocByID(id: string, value: boolean) {
-  //   console.log(this.userUID);
-  //   return this.afs
-  //     .doc<User>(`users/${this.userUID}`)
-  //     .collection<any>('affirmations')
-  //     .doc<Affirmation>(id)
-  //     .update({ name: 'kwiatki' });
-  // }
+  updateDocByID(id: string, value) {
+    console.log(this.userUID);
+    return this.afs
+      .doc<User>(`users/${this.userUID}`)
+      .collection<any>('affirmations')
+      .doc<Affirmation>(id)
+      .update(value);
+  }
 }

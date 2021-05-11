@@ -20,11 +20,13 @@
       >
         <i
           class="mdi"
-          [ngClass]="[lightbulbed ? 'mdi-lightbulb' : 'mdi-lightbulb-outline']"
+          [ngClass]="[
+            isLightBulbed ? 'mdi-lightbulb' : 'mdi-lightbulb-outline'
+          ]"
         ></i>
       </button>
 
-      <div *ngIf="!lightbulbed; else crafted">
+      <div *ngIf="!isLightBulbed; else crafted">
         <pagination-controls
           (pageChange)="p = $event"
           id="first"
@@ -47,7 +49,7 @@
           type="button"
           class="btn btn-inverse-danger btn-rounded btn-icon"
           [disabled]="!isButtonEnabled"
-          (click)="openModal('delete-affirmation-modal')"
+          (click)="openModal('delete-affirmations-modal')"
         >
           <i class="mdi mdi-delete"></i>
         </button>
@@ -92,7 +94,7 @@
     type="button"
     class="btn btn-inverse-primary btn-rounded btn-icon"
     [disabled]="!isButtonEnabled"
-    (click)="openModal('copy-affirmation-modal')"
+    (click)="openModal('copy-affirmations-modal')"
   >
     <i class="mdi mdi-content-duplicate"></i>
   </button>
@@ -111,7 +113,7 @@
   ></ezo-affirmation-item>
 </ng-template>
 
-<ezo-modal id="delete-affirmation-modal">
+<ezo-modal id="delete-affirmations-modal">
   <h2>Warning!</h2>
 
   <p>Are you sure you want to delete affirmation(s)?</p>
@@ -127,20 +129,20 @@
           'Dismiss'
         )
       "
-      (click)="closeModal('delete-affirmation-modal')"
+      (click)="closeModal('delete-affirmations-modal')"
     >
       Yes
     </button>
     <button
       type="button"
       class="btn btn-light"
-      (click)="closeModal('delete-affirmation-modal')"
+      (click)="closeModal('delete-affirmations-modal')"
     >
       Cancel
     </button>
   </div>
 </ezo-modal>
-<ezo-modal id="copy-affirmation-modal">
+<ezo-modal id="copy-affirmations-modal">
   <h2>Confirm!</h2>
 
   <p>Are you sure you want copy crafted affirmation(s) to your own list?</p>
@@ -156,14 +158,14 @@
           'Dismiss'
         )
       "
-      (click)="closeModal('copy-affirmation-modal')"
+      (click)="closeModal('copy-affirmations-modal')"
     >
       Yes
     </button>
     <button
       type="button"
       class="btn btn-light"
-      (click)="closeModal('copy-affirmation-modal')"
+      (click)="closeModal('copy-affirmations-modal')"
     >
       Cancel
     </button>
@@ -178,7 +180,7 @@
       <input matInput formControlName="name" />
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Select</mat-label>
+      <mat-label>Select Type</mat-label>
       <mat-select formControlName="type">
         <mat-option *ngFor="let o of types" [value]="o?.type">{{
           o?.type
