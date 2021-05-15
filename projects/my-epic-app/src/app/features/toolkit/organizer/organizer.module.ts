@@ -20,6 +20,7 @@ import {
 import { AffirmationListComponent } from './organizer/affirmations/affirmation-list/affirmation-list.component';
 import { AffirmationsComponent } from './organizer/affirmations/affirmations.component';
 import { OrganizerComponent } from './organizer/organizer.component';
+import { StatsComponent } from './organizer/stats/stats.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     AffirmationsComponent,
     AffirmationItemComponent,
     AffirmationListComponent,
-    AffirmationDetailComponent
+    AffirmationDetailComponent,
+    StatsComponent
   ],
   imports: [
     RouterModule.forChild(routes),
