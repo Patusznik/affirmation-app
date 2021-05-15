@@ -140,6 +140,7 @@ export class AffirmationListComponent {
 
   onSubmitAffirmation() {
     this.affService.createDoc(this.affirmationForm.value);
+    console.log(this.affirmationForm.value)
     this.affirmationForm.reset();
   }
 }

@@ -2,14 +2,30 @@
   width: 100%;
   height: auto;
 }
+ezo-landing-page
+{
+  background-color: #D0E8F2;
+}
+
+.background
+{
+  background-color: #D0E8F2;
+}
+
+.logo
+{
+  width: 40px;
+  height: auto;
+}
 
 .navbar {
-  background-color: hsl(217, 28%, 15%);
+  background-color: #D0E8F2;
 }
 
 .navbarlinks {
   display: flex;
   justify-content: flex-end;
+  color: hsl(217, 43%, 72%);
 }
 
 .navbaritem {
@@ -17,19 +33,40 @@
 }
 
 .presentation {
-  background-color: hsl(217, 28%, 15%);
+  background-color: #D0E8F2;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+ 
 }
 
 .presentation img:first-of-type {
-  max-width: 500px;
+  // padding-bottom: 10px;
+  height: 100%;
+  width: 100%;
+  bottom: 20px;
+  max-height: 600px;
 }
+.top-text
+{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.top-text img:first-of-type
+{
+  height: 200px;
+  width: auto;
+  padding-top: 10px;
+}
+
 
 .advantages {
   display: grid;
   grid-template-columns: 50% 50%;
+  background-color: #D0E8F2;
   /* margin-left: 10em;
   margin-right: 10em; */
   justify-items: center;
@@ -49,19 +86,23 @@
 
 .advantage img {
   width: auto;
-  height: 100px;
+  height: 90px;
+  padding-top: 20px;
 }
 
 .presentationfinish {
+  background-color: #D0E8F2;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 25% 75%;
   grid-template-rows: auto;
-
+  justify-items: center;
   margin: 10em 3em 10em 3em;
+  padding-left: 5%;
+  padding-left: 5%;
 }
 
 .presentationfinish img {
-  max-width: 500px;
+  max-width: 200px;
   grid-area: 1 / 1 / 1 / 2;
 }
 
@@ -86,10 +127,11 @@
   align-content: center;
   margin: 1em;
   gap: 1em;
+  color: white;
 }
 
 .quote {
-  background-color: hsl(219, 30%, 18%);
+  background-color: #fae396;
   max-width: 310px;
   padding: 1em;
   border-radius: 5px;
@@ -132,18 +174,15 @@
 }
 
 .sign-up-background {
+  color: linear-gradient(#D0E8F2, #8cafbe);
   display: flex;
   justify-content: center;
-  background-image: linear-gradient(
-    hsl(218, 28%, 13%) 50%,
-    hsl(216, 53%, 9%) 50%
-  );
-  margin-top: 10em;
+  background: linear-gradient(#D0E8F2,#8cafbe);
 }
 
 .sign-up-background div {
   /* max-width: 700px; */
-  background-color: hsl(217, 28%, 15%);
+  background-color: #fae396;
   padding: 50px 8rem;
   border-radius: 15px;
 }
@@ -153,13 +192,15 @@
 }
 
 .sign-up-background input {
+  padding-left: 20px;
   border-radius: 20px;
   width: 600px;
   border: none;
   height: 50px;
 }
 
-button {
+
+.getstarted button {
   border-radius: 40px;
   color: white;
   height: 50px;
@@ -174,15 +215,46 @@ button {
   border: none;
 }
 
+form button{
+  justify-items:  center;
+  border-radius: 40px;
+  color: white;
+  height: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-left: 50%;
+  margin-left: 25px;
+  background-image: linear-gradient(
+    to right,
+    hsl(176, 68%, 64%),
+    hsl(198, 60%, 50%)
+  );
+  border: none;
+}
+.navbarlinks button{
+  border-radius: 0px;
+  color: #8cafbe;
+  height: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-left: 25px;
+  border: 2px solid #8cafbe;
+  background-color: transparent;
+
+}
+
 .footer {
   display: flex;
   justify-content: space-around;
   padding-top: 10em;
-  background-color: hsl(216, 53%, 9%);
+  background-color: #8cafbe;
 }
+
+
 
 .footer div {
   max-width: 200px;
+  padding-bottom: 10px;
 }
 
 /*
